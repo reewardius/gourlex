@@ -51,11 +51,11 @@ nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 5
 ```
 # gourlex + nuclei (windows)
 ```
-Get-Content file_list.txt | ForEach-Object { gourlex -t $_ -s -uO | Out-File -Append gourlex_results }
+Get-Content domains | ForEach-Object { gourlex -t $_ -s -uO | Out-File -Append gourlex_results }
 nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
 # gourlex + nuclei (linux)
 ```
-for i in $(cat domain_list); do gourlex -t $i -s -uO >> gourlex_results; done
+for i in $(cat domains); do gourlex -t $i -s -uO >> gourlex_results; done
 nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
