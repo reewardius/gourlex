@@ -44,3 +44,8 @@ The arguments are:
 Example:
   gourlex -t domain.com
 ```
+# Nuclei 
+```
+gourlex -t github.com -s -uO > results.txt
+nuclei -l results.txt -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
+```
