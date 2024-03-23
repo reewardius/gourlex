@@ -46,7 +46,7 @@ Example:
 ```
 # Nuclei (custom)
 ```
-gourlex -t github.com -s -uO > results.txt
+gourlex -t github.com -s -uO > gourlex_results
 nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
 # gourlex + nuclei (windows)
