@@ -59,3 +59,7 @@ nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 5
 for i in $(cat domains); do gourlex -t $i -s -uO >> gourlex_results; done
 nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
+# gourlex + nuclei (firebase)
+```
+nuclei -l gourlex_results -id firebase-config-exposure -rl 500 -c 100 -silent
+```
