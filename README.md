@@ -44,8 +44,18 @@ The arguments are:
 Example:
   gourlex -t domain.com
 ```
-# Nuclei 
+# Nuclei (custom)
 ```
 gourlex -t github.com -s -uO > results.txt
-nuclei -l results.txt -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
+nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
+```
+# gourlex + nuclei (windows)
+```
+Get-Content file_list.txt | ForEach-Object { gourlex -t $_ -s -uO | Out-File -Append gourlex_results }
+nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
+```
+# gourlex + nuclei (linux)
+```
+for i in $(cat domain_list); do gourlex -t $i -s -uO >> gourlex_results; done
+nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
