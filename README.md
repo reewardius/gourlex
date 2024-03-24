@@ -60,6 +60,10 @@ while IFS= read -r line; do gourlex -t $line -s -uO; done < domains >> gourlex_r
 nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
 # gourlex + nuclei (firebase)
+Взято из статей по взлому жепы Firebase. Это всё один ресёрч, разбитый по трём блогам 
+1. https://kibty.town/blog/chattr/
+2. https://mrbruh.com/chattr/
+3. https://env.fail/posts/firewreck-1/
 ```
 nuclei -l gourlex_results -id firebase-config-exposure -rl 500 -c 100 -silent
 ```
