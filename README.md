@@ -56,7 +56,7 @@ nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 5
 ```
 # gourlex + nuclei (linux)
 ```
-for i in domains; do gourlex -t $i -s -uO >> gourlex_results; done << file.txt
+for i in $(cat domains); do gourlex -t %i -s -uO >> gourlex_results
 nuclei -l gourlex_results -tags token,tokens,takeover,provider -es unknown -rl 500 -c 100 -silent
 ```
 # gourlex + nuclei (firebase)
