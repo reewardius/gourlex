@@ -5,8 +5,6 @@ One domain:
 gourlex -t https://github.com -s -uO > gourlex_results
 nuclei -l gourlex_results -tags token,tokens,takeover -es unknown -rl 500 -c 100 -silent
 ```
-![image](https://github.com/reewardius/gourlex/assets/68978608/f6d83252-e7a7-4572-9349-0733c6494502)
-
 Multiple domains (via file)
 ```
 gourlex -f domains.txt -s -uO > gourlex_results
