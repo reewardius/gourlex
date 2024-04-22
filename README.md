@@ -1,5 +1,9 @@
 # Gourlex
 
+```
+.\gourlex.exe -f .\domains.txt -uO -s
+```
+
 ## Overview
 
 Gourlex is a simple tool that can be used to extract URLs and paths from web pages. 
