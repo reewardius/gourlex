@@ -1,7 +1,7 @@
 # Gourlex
 
 ```
-.\gourlex.exe -f .\domains.txt -uO -s
+.\gourlex.exe -f domains.txt -uO -s
 ```
 
 ## Overview
