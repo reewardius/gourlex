@@ -14,14 +14,11 @@ import (
 )
 
 func main() {
-	var filePath string
-	var cookie string
-	var customHeader string
-	var proxyFlag string
-	var urlOnly bool
-	var pathOnly bool
-	var silentMode bool
+	var filePath, targetURL, cookie, customHeader, proxyFlag string
+	var urlOnly, pathOnly, silentMode bool
+
 	flag.StringVar(&filePath, "f", "", "Specify file containing URLs")
+	flag.StringVar(&targetURL, "t", "", "Specify a single target URL")
 	flag.StringVar(&cookie, "c", "", "Specify cookies")
 	flag.StringVar(&customHeader, "r", "", "Specify headers")
 	flag.StringVar(&proxyFlag, "p", "", "Specify the proxy URL")
@@ -40,11 +37,18 @@ func main() {
 		printBanner()
 	}
 
-	if filePath == "" {
-		fmt.Println("Error: No input file specified.")
-		return
-	}
+	client := createHTTPClient(proxyFlag, silentMode)
 
+	if filePath != "" {
+		processFile(filePath, client, cookie, customHeader, urlOnly, pathOnly, silentMode)
+	} else if targetURL != "" {
+		processURL(targetURL, client, cookie, customHeader, urlOnly, pathOnly, silentMode)
+	} else {
+		fmt.Println("Error: No input provided. Use -f for a file or -t for a single URL.")
+	}
+}
+
+func processFile(filePath string, client *http.Client, cookie, customHeader string, urlOnly, pathOnly, silentMode bool) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		fmt.Printf("Error opening file: %v\n", err)
@@ -53,10 +57,8 @@ func main() {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	client := createHTTPClient(proxyFlag, silentMode)
 	for scanner.Scan() {
-		url := scanner.Text()
-		processURL(url, client, cookie, customHeader, urlOnly, pathOnly, silentMode)
+		processURL(scanner.Text(), client, cookie, customHeader, urlOnly, pathOnly, silentMode)
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -179,9 +181,10 @@ func validateUrl(inputURL string) (string, error) {
 }
 
 func printHelp() {
-	fmt.Println("Usage: ./gourlex -f <file_path> [options]")
+	fmt.Println("Usage: gourlex -f <file_path> or -t <target_url> [options]")
 	fmt.Println("Options:")
 	fmt.Println("  -f string   Specify file containing URLs")
+	fmt.Println("  -t string   Specify a single target URL")
 	fmt.Println("  -c string   Specify cookies")
 	fmt.Println("  -r string   Specify custom headers")
 	fmt.Println("  -p string   Specify the proxy URL")
