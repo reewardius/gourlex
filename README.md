@@ -1,8 +1,16 @@
 # Gourlex
 
 ```
-.\gourlex.exe -f domains.txt -uO -s
+gourlex -t https://github.com -s -uO > gourlex_results
+nuclei -l gourlex_results -tags token,tokens,takeover -es unknown -rl 500 -c 100 -silent
 ```
+![image](https://github.com/reewardius/gourlex/assets/68978608/f6d83252-e7a7-4572-9349-0733c6494502)
+
+```
+gourlex -f domains.txt -s -uO > gourlex_results
+nuclei -l gourlex_results -tags token,tokens,takeover -es unknown -rl 500 -c 100 -silent
+```
+![image](https://github.com/reewardius/gourlex/assets/68978608/e4123163-368c-498b-b0c6-00ec999da068)
 
 ## Overview
 
